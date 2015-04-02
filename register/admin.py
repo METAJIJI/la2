@@ -39,7 +39,4 @@ class PersonAdmin(admin.ModelAdmin):
     list_display = ('login', 'email',)
 
 
-
-
-
 admin.site.register(Accounts, PersonAdmin)
