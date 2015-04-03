@@ -1,0 +1,15 @@
+{% extends "zinnia/base.html" %}
+
+{% block title %}Create an account{% endblock %}
+
+{% block content %}
+
+{% for i in status %}
+<ul>
+    <li>{{ i.server }} = {{ i.active }}</li>
+</ul>
+{% endfor %}
+
+
+
+{% endblock %}

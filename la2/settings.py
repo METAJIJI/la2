@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django_comments',
 
+
     'mptt',
     'zinnia_bootstrap',
     'sorl.thumbnail',
@@ -53,6 +54,8 @@ INSTALLED_APPS = (
 
     'zinnia_markitup',
     'register',
+    'check',
+
 
 )
 MIDDLEWARE_CLASSES = (
@@ -100,11 +103,19 @@ DATABASES = {
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
         },
+    # 'server': {
+    #     'NAME': 'server_db',
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'USER': 'skver',
+    #     'PASSWORD': '1989'
+    # }
     'server': {
-        'NAME': 'server_db',
+        'NAME': 'vl2p-ls',
         'ENGINE': 'django.db.backends.mysql',
-        'USER': 'skver',
-        'PASSWORD': '1989'
+        'USER': 'vl2p',
+        'PASSWORD': 'MEhYrf6en69YJ5Uh',
+        'HOST': 'azure1.metajiji.tk',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
 

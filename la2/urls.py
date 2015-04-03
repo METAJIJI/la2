@@ -6,6 +6,7 @@ from django.conf.urls import patterns
 from django.views.generic.base import RedirectView
 from django.views.generic.base import TemplateView
 from register.views import *
+from check.views import *
 
 
 admin.autodiscover()
@@ -19,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^register/', register),
     url(r'^complete/', complete),
+    url(r'^status/', check),
 
 
     )

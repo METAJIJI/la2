@@ -1,8 +1,8 @@
-
+from models import *
 from form import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-
+import socket
 
 def register(request):
     if request.method == 'POST':
@@ -18,3 +18,4 @@ def register(request):
 
 def complete(request):
     return render(request, 'complete.html')
+

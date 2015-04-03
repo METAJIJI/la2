@@ -33,8 +33,20 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
 
+class UserEditForm(forms.ModelForm):
+    """A form for creating new users. Includes all the required
+    fields, plus a repeated password."""
+    pass
+
 
 class PersonAdmin(admin.ModelAdmin):
+    def get_form(self, request, obj=None, **kwargs):
+        # Proper kwargs are form, fields, exclude, formfield_callback
+        if obj:
+            self.form = UserEditForm
+        else:
+            self.form = UserCreationForm
+        return super(PersonAdmin, self).get_form(request, obj, **kwargs)
     form = UserCreationForm
     list_display = ('login', 'email',)
 
