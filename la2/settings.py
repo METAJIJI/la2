@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'zinnia_markitup',
     'register',
     'check',
+    'registration',
 
 
 )
@@ -146,3 +147,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DATABASE_ROUTERS = ['register.router.RegisterRouter']
 
 hash_type = 'whirlpool' # or 'sha1'
+
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+
+LOGIN_REDIRECT_URL = '/'

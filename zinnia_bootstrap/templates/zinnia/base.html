@@ -10,7 +10,10 @@
             <p>
                 {% trans "линейка и всякая хрень" %}
             </p>
-            <a href="/register/" class="btn btn-primary btn-lg">Registration</a>
+
+            {% if user.is_authenticated %}
+                <a href="/register/" class="btn btn-primary btn-lg">Registration</a>
+            {% endif %}
 
         </div>
     </aside>
