@@ -3,6 +3,10 @@ from __future__ import unicode_literals
 from django.db import models
 import whirlpool
 import base64
+import hashlib
+from la2.settings import hash_type
+
+
 
 class Accounts(models.Model):
     login = models.CharField(primary_key=True, max_length=45)
@@ -29,8 +33,13 @@ class Accounts(models.Model):
         db_table = 'accounts'
 
     def set_passwords(self, raw_password):
-        wp = whirlpool.new(raw_password)
-        self.password = base64.b64encode(wp.digest())
+        if hash_type == 'whirlpool':
+            wp = whirlpool.new(raw_password)
+            self.password = base64.b64encode(wp.digest())
+        elif hash_type == 'sha1':
+            wp = hashlib.sha1(raw_password)
+            self.password = base64.b64encode(wp.digest())
+
 
     def check_password(self, password):
         pass

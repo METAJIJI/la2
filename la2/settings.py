@@ -144,3 +144,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 DATABASE_ROUTERS = ['register.router.RegisterRouter']
+
+hash_type = 'whirlpool' # or 'sha1'
