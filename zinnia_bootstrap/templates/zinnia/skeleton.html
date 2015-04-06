@@ -63,22 +63,17 @@
             <ul class="nav navbar-nav navbar-left">
                 {% url 'zinnia:category_list' as category_list_url %}
                 <li {% if category_list_url in request.path %}class="active"{% endif %}>
-                    <a href="{{ category_list_url }}" title="{% trans "Category list" %}">
-                        {% trans "Categories" %}
+                    <a href="{{ category_list_url }}" title="{% trans "News" %}">
+                        {% trans "News" %}
                     </a>
                 </li>
-                {% url 'zinnia:author_list' as author_list_url %}
-                <li {% if author_list_url in request.path %}class="active"{% endif %}>
-                    <a href="{{ author_list_url }}" title="{% trans "Author list" %}">
-                        {% trans "Authors" %}
+
+                <li>
+                    <a href="/cabinet/" title="{% trans "Cabinet" %}">
+                        {% trans "Cabinet" %}
                     </a>
                 </li>
-                {% url 'zinnia:tag_list' as tag_list_url %}
-                <li {% if tag_list_url in request.path %}class="active"{% endif %}>
-                    <a href="{{ tag_list_url }}" title="{% trans "Tag list" %}">
-                        {% trans "Tags" %}
-                    </a>
-                </li>
+
 
 
                 <li class="divider-vertical"></li>

@@ -1,15 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from models import State
 import socket
+import json
 
-
-def check(request):
+def show(request):
     check_login_server()
     check_game_server()
+    result_lst = list()
+    for state in State.objects.all():
+        result_lst.append([state.server, state.active])
 
-    status = State.objects.values('server','active')
-    return render(request, 'status.html', {'status': status})
-
+    return HttpResponse(json.dumps(result_lst), content_type='application/javascript')
 
 def check_login_server(host='ls.la2.metajiji.tk', port=2106, timeout=1):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

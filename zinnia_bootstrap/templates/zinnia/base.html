@@ -12,10 +12,20 @@
             </p>
 
             {% if user.is_authenticated %}
-                <a href="/register/" class="btn btn-primary btn-lg">Registration</a>
+                <a href="/register/" class="btn btn-primary btn-lg">Register game account</a>
             {% endif %}
 
         </div>
+    </aside>
+    <aside id="widget-categories" class="widget panel panel-default">
+        <div class="panel-heading">
+            {% trans "online" %}
+        </div>
+        <p> online monitor</p>
+     <ul class="list-unstyled" id="server-status">
+
+            </ul>
+
     </aside>
     <aside id="widget-categories" class="widget panel panel-default">
         <div class="panel-heading">
@@ -75,4 +85,27 @@
             </ul>
         </aside>
     {% endif %}
+    <script>
+function update_status() {
+            $.ajax({
+                type: "GET",
+                url: "/show/",
+                data: {},
+                success: function (data) {
+                    $("#server-status").html("");
+                    for (var i = 0; i <= data.length; i++) {
+                        $("#server-status").append('<li>'+data[i][0]+' '+data[i][1]+'</li>');
+                    }
+                },
+                dataType: "json"
+            });
+        }
+setInterval(function () {
+            update_status();
+
+        }, 2000);
+update_status();
+
+
+</script>
 {% endblock sidebar %}
