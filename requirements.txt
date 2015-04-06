@@ -23,3 +23,5 @@ sorl-thumbnail==12.2
 wsgiref==0.1.2
 zinnia-theme-bootstrap==0.4
 zinnia-wysiwyg-markitup==1.1
+gevent==1.0.1
+gunicorn==19.3.0
