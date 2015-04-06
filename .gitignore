@@ -42,3 +42,7 @@ nosetests.xml
 
 
 local_settings.py
+
+env/
+logs/
+*.pid
