@@ -136,3 +136,8 @@ try:
 except Exception as e:
     pass
 
+server_list = [
+    #[server id, adress, port, timeout, server name]
+    [1, 'ls.la2.metajiji.tk', 2106, 1, 'login server'],
+    [2, 'ls.la2.metajiji.tk', 7777, 1, 'game server']
+]

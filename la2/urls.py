@@ -26,5 +26,4 @@ urlpatterns = patterns('',
     url(r'^change/(?P<login>[^\.]+)', change_password),
     url(r'^changed/', changed),
 
-
     )
