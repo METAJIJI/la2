@@ -1,0 +1,17 @@
+{% extends "zinnia/base.html" %}
+
+{% block title %}change pass{% endblock %}
+
+{% block content %}
+  <h1> {{ acc.login }} </h1>
+
+  <form action="" method="post">{% csrf_token %}
+      {{ form.as_p }}
+
+      <input type="submit" value="change">
+  </form>
+
+
+
+
+{% endblock %}

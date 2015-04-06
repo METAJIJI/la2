@@ -29,3 +29,21 @@ class UserCreationForm(forms.ModelForm):
             user.save()
         return user
 
+class ChangePasswordForm(forms.Form):
+    # """A form for creating new users. Includes all the required
+    # fields, plus a repeated password."""
+    oldpassword = forms.CharField(label='Old Password', widget=forms.PasswordInput)
+
+    password1 = forms.CharField(label='New Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+
+
+    def clean_password2(self):
+        # Check that the two password entries match
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Passwords don't match")
+        return password2
+
+

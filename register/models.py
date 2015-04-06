@@ -40,6 +40,9 @@ class Accounts(models.Model):
             self.password = base64.b64encode(wp.digest())
 
 
-    def check_password(self, password):
-        pass
+    def check_passwords(self, raw_password):
+        if self.password == base64.b64encode(whirlpool.new(raw_password).digest()):
+            return True
+        else:
+            return False
 

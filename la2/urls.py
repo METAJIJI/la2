@@ -23,6 +23,9 @@ urlpatterns = patterns('',
     url(r'^status/', check),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^cabinet/', cabinet),
+    url(r'^change/(?P<login>[^\.]+)', change_password),
+    url(r'^changed/', changed),
+
 
 
 

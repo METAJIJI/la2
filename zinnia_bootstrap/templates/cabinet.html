@@ -7,7 +7,7 @@
 {#    {{ q }}#}
 {% for i in query %}
     <ul>
- <li>{{ i.user }}, {{ i.login }}</li>
+ <li>{{ i.user }}, {{ i.login }} change pass <a href="/change/{{ i.login }}/">change pass</a></li>
     </ul>
 {% endfor %}
 {% endblock %}
