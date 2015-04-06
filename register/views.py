@@ -24,3 +24,10 @@ def register(request):
 def complete(request):
     return render(request, 'complete.html')
 
+def cabinet(request):
+    query = ServerLogin.objects.using('default').filter(user_id=request.user.id)
+
+    return render(request, "cabinet.html", {
+        'query': query,
+    })
+

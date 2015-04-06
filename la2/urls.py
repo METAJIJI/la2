@@ -21,7 +21,9 @@ urlpatterns = patterns('',
     url(r'^register/', register),
     url(r'^complete/', complete),
     url(r'^status/', check),
-    url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^cabinet/', cabinet),
+
 
 
     )
