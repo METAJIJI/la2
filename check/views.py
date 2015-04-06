@@ -28,15 +28,3 @@ def check_servers(id, host, port, timeout, server):
         else:
             b = State(id=id, active=False, server=server)
             b.save()
-
-
-def check_game_server(host='gs.la2.metajiji.tk', port=7777, timeout=1):
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(float(timeout))
-
-        if sock.connect_ex((host, int(port))) == 0:
-            b = State(id=2, active=True, server='game')
-            b.save()
-        else:
-            b = State(id=2, active=False, server='game')
-            b.save()
