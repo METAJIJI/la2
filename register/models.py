@@ -10,8 +10,7 @@ from la2.settings import hash_type
 class Accounts(models.Model):
     login = models.CharField(primary_key=True, max_length=45)
     password = models.CharField(max_length=128,
-                                help_text=("Use '[algo]$[salt]$[hexdigest]' "
-                                           "or use the <a href=\"password/\">change password form</a>."))
+                                help_text=("password is hashed by "+hash_type))
     lastactive = models.IntegerField(default='0')
     access_level = models.IntegerField(default='0')
     lastip = models.CharField(db_column='lastIP', max_length=15, blank=True, default='')  # Field name made lowercase.

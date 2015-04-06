@@ -4,15 +4,15 @@ import socket
 import json
 
 def show(request):
-    check_login_server()
-    check_game_server()
+    check_servers()
+
     result_lst = list()
     for state in State.objects.all():
         result_lst.append([state.server, state.active])
 
     return HttpResponse(json.dumps(result_lst), content_type='application/javascript')
 
-def check_login_server(host='ls.la2.metajiji.tk', port=2106, timeout=1):
+def check_servers(host='ls.la2.metajiji.tk', port=2106, timeout=1):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(float(timeout))
 
