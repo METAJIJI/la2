@@ -95,30 +95,7 @@ ZINNIA_ENTRY_CONTENT_TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'la2_db',
-        'USER': 'skver',
-        'PASSWORD': '1989',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
-        },
-    # 'server': {
-    #     'NAME': 'server_db',
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'USER': 'skver',
-    #     'PASSWORD': '1989'
-    # }
-    'server': {
-        'NAME': 'vl2p-ls',
-        'ENGINE': 'django.db.backends.mysql',
-        'USER': 'vl2p',
-        'PASSWORD': 'MEhYrf6en69YJ5Uh',
-        'HOST': 'azure1.metajiji.tk',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
-    }
-}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -152,3 +129,8 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 
 LOGIN_REDIRECT_URL = '/'
+
+try:
+    from la2.local_settings import *
+except Exception as e:
+    pass
