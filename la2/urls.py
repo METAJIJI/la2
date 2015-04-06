@@ -12,8 +12,8 @@ from check.views import *
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', RedirectView.as_view(url='/blog/')),
-    url(r'^blog/', include('zinnia.urls', namespace='zinnia')),
+    url(r'^blog', RedirectView.as_view(url='/')),
+    url(r'^', include('zinnia.urls', namespace='zinnia')),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^admin/tools/', include('admin_tools.urls')),
@@ -25,8 +25,6 @@ urlpatterns = patterns('',
     url(r'^cabinet/', cabinet),
     url(r'^change/(?P<login>[^\.]+)', change_password),
     url(r'^changed/', changed),
-
-
 
 
     )
