@@ -7,7 +7,6 @@ import hashlib
 from la2.settings import hash_type
 
 
-
 class Accounts(models.Model):
     login = models.CharField(primary_key=True, max_length=45)
     password = models.CharField(max_length=128,

@@ -56,6 +56,7 @@ INSTALLED_APPS = (
     'register',
     'check',
     'registration',
+    'extend_user',
 
 
 )
@@ -134,3 +135,4 @@ try:
     from la2.local_settings import *
 except Exception as e:
     pass
+
