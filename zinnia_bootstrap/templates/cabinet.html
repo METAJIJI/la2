@@ -1,10 +1,10 @@
 {% extends "zinnia/base.html" %}
 
-{% block title %}Create an account{% endblock %}
+{% block title %}acount managment{% endblock %}
 
 {% block content %}
   <h1>cabinet</h1>
-{#    {{ q }}#}
+
 {% for i in query %}
     <ul>
  <li>{{ i.user }}, {{ i.login }} change pass <a href="/change/{{ i.login }}/">change pass</a></li>

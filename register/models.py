@@ -31,6 +31,7 @@ class Accounts(models.Model):
         managed = False
         db_table = 'accounts'
 
+
     def set_passwords(self, raw_password):
         if hash_type == 'whirlpool':
             wp = whirlpool.new(raw_password)

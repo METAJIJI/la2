@@ -1,4 +1,4 @@
-from models import *
+from models import Accounts
 from form import UserCreationForm, ChangePasswordForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -7,6 +7,9 @@ from extend_user.models import ServerLogin
 from django.contrib.auth.models import User
 import whirlpool
 import base64
+import hashlib
+from la2.settings import hash_type
+
 
 
 def register(request):
@@ -33,11 +36,19 @@ def change_password(request, login):
         if form.is_valid():
             password = request.POST.get('password1', '')
             oldpass = request.POST.get('oldpassword', '')
-            if acc.password == base64.b64encode(whirlpool.new(oldpass).digest()):
+            if hash_type == 'whirlpool':
                 password = base64.b64encode(whirlpool.new(password).digest())
-                acc_obj = Accounts(login=login, password=password)
-                acc_obj.save()
-                return HttpResponseRedirect("/changed/")
+                if acc.password == base64.b64encode(whirlpool.new(oldpass).digest()):
+                    acc_obj = Accounts(login=login, password=password)
+                    acc_obj.save()
+                    return HttpResponseRedirect("/changed/")
+            elif hash_type == 'sha1':
+                password = base64.b64encode(hashlib.sha1(password).digest())
+                if acc.password == base64.b64encode(hashlib.sha1(oldpass).digest()):
+                    acc_obj = Accounts(login=login, password=password)
+                    acc_obj.save()
+
+                    return HttpResponseRedirect("/changed/")
             return render(request, "change.html", {
         'form': form, 'acc': acc,
     })
