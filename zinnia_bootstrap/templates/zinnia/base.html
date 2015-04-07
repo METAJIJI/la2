@@ -86,6 +86,7 @@
         </aside>
     {% endif %}
     <script>
+
 function update_status() {
             $.ajax({
                 type: "GET",
@@ -100,12 +101,15 @@ function update_status() {
                 dataType: "json"
             });
         }
+
+
+
+
 setInterval(function () {
             update_status();
+        }, 1000*60);
 
-        }, 2000);
 update_status();
-
 
 </script>
 {% endblock sidebar %}

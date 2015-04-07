@@ -1,0 +1,2 @@
+python manage.py runcrons
+python manage.py runserver
