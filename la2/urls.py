@@ -25,5 +25,5 @@ urlpatterns = patterns('',
     url(r'^cabinet/', cabinet),
     url(r'^change/(?P<login>[^\.]+)', change_password),
     url(r'^changed/', changed),
-
+    url(r'^captcha/', include('captcha.urls')),
     )

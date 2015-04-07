@@ -3,11 +3,27 @@
 {% block title %}acount managment{% endblock %}
 
 {% block content %}
-  <h1>cabinet</h1>
+    <h1>cabinet</h1>
 
-{% for i in query %}
-    <ul>
- <li>{{ i.user }}, {{ i.login }} change pass <a href="/change/{{ i.login }}/">change pass</a></li>
-    </ul>
-{% endfor %}
+
+    <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Game account</th>
+            <th>Change password</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in query %}
+            <tr>
+                <td>{{ i.user }}</td>
+                <td>{{ i.login }}</td>
+                <td><a href="/change/{{ i.login }}/">change pass</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
 {% endblock %}

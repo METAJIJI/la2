@@ -39,9 +39,9 @@ class UserCreationForm(forms.ModelForm):
 class UserEditForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    class Meta:
-        model = Accounts
-
+    # class Meta:
+    #     model = Accounts
+    pass
 
 
 class PersonAdmin(admin.ModelAdmin):

@@ -1,5 +1,6 @@
 from django import forms
 from register.models import *
+from captcha.fields import CaptchaField
 
 
 class UserCreationForm(forms.ModelForm):
@@ -7,7 +8,7 @@ class UserCreationForm(forms.ModelForm):
     fields, plus a repeated password."""
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
-
+    captcha = CaptchaField()
     class Meta:
         model = Accounts
         fields = ('login', 'email')
@@ -39,6 +40,7 @@ class ChangePasswordForm(forms.Form):
 
     password1 = forms.CharField(label='New Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    captcha = CaptchaField()
 
 
     def clean_password2(self):

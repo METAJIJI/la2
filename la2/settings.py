@@ -47,6 +47,8 @@ INSTALLED_APPS = (
 
     'django_cron',
 
+    'captcha',
+
     'mptt',
     'zinnia_bootstrap',
     'sorl.thumbnail',
@@ -148,3 +150,5 @@ CRON_CLASSES = [
 ]
 
 DEFAULT_CHARSET = 'utf8'
+
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'
