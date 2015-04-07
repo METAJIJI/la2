@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django_comments',
 
+    'django_cron',
 
     'mptt',
     'zinnia_bootstrap',
@@ -140,4 +141,8 @@ server_list = [
     #[server id, adress, port, timeout, server name]
     [1, 'ls.la2.metajiji.tk', 2106, 1, 'login server'],
     [2, 'ls.la2.metajiji.tk', 7777, 1, 'game server']
+]
+
+CRON_CLASSES = [
+    'check.cron.Check',
 ]
