@@ -15,6 +15,9 @@ class UserCreationForm(forms.ModelForm):
     class Meta:
         model = Accounts
         fields = ('login', 'email')
+        widgets = {
+            "email" : forms.EmailInput(),
+        }
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -36,7 +39,9 @@ class UserCreationForm(forms.ModelForm):
 class UserEditForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    pass
+    class Meta:
+        model = Accounts
+
 
 
 class PersonAdmin(admin.ModelAdmin):
@@ -47,7 +52,7 @@ class PersonAdmin(admin.ModelAdmin):
         else:
             self.form = UserCreationForm
         return super(PersonAdmin, self).get_form(request, obj, **kwargs)
-    form = UserCreationForm
+    # form = UserCreationForm
     list_display = ('login', 'email',)
 
 

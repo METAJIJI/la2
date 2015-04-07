@@ -146,3 +146,5 @@ server_list = [
 CRON_CLASSES = [
     'check.cron.Check',
 ]
+
+DEFAULT_CHARSET = 'utf8'
