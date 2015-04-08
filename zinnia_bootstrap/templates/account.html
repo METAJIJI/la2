@@ -5,9 +5,27 @@
 {% block content %}
     <h1>account {{ login }}</h1>
 
-{% for i in query %}
-    {{ i }}
-{% endfor %}
+<table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+{#            <th></th>#}
+            <th><a href="/statistics/{{ server }}/2">Char name</a></th>
+            <th><a href="/statistics/{{ server }}/3">Level</a></th>
+            <th><a href="/statistics/{{ server }}/5">Class</a></th>
 
+
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for i in query %}
+            <tr>
+                <td>{{ i.char_name }}</td>
+                <td>{{ i.level }}</td>
+                <td>{{ i.ClassName }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

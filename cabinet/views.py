@@ -59,16 +59,20 @@ def cabinet(request):
 
 
 def show_account(request, login):
-    # login = login[:-1]
+    login = login[:-1]
     server = '1'
-    q= '''SELECT characters.obj_Id, characters.account_name,  characters.char_name, character_subclasses.level, characters.accesslevel, characters.lastAccess, char_templates.ClassName
+    check = ServerLogin.objects.using('default').filter(user_id=request.user.id, login=login)
+
+    q= '''SELECT characters.obj_Id, characters.account_name,  characters.char_name,
+character_subclasses.level, characters.accesslevel, characters.lastAccess, char_templates.ClassName
 FROM `characters`
 LEFT JOIN `character_subclasses` ON characters.obj_Id = character_subclasses.char_obj_id
 LEFT JOIN `char_templates` ON character_subclasses.class_id = char_templates.ClassId
-WHERE `characters.account_name` =%s''' % login
-
-    query = Characters.objects.using(server).raw(q)
-
+WHERE characters.account_name = '%s' ''' % login
+    if check:
+        query = Characters.objects.using(server).raw(q)
+    else:
+        return HttpResponseRedirect("/cabinet/")
     return render(request, "account.html", {
         'query': query, 'server': server, 'login': login
     })
