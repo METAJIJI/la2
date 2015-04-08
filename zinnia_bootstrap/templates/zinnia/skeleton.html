@@ -62,7 +62,7 @@
             </button>
             <img src="{% static "zinnia_bootstrap/img/zinnia.png" %}" class="pull-left" alt="La2 supa dupa server"/>
             <a href="{% url 'zinnia:entry_archive_index' %}" title="la2 supa server" class="navbar-brand" rel="home">
-                La2 supa dupa server
+                La2 server
             </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -80,7 +80,11 @@
                     </a>
                 </li>
 
-
+                <li>
+                    <a href="/statistics/" title="{% trans "Statistic" %}">
+                        {% trans "Statistic" %}
+                    </a>
+                </li>
 
                 <li class="divider-vertical"></li>
             </ul>

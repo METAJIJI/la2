@@ -29,8 +29,7 @@ urlpatterns = patterns('',
     url(r'^captcha/', include('captcha.urls')),
     url(r'^server/$', pick_server),
     # url(r'^statistics/(?P<server>[^\.]+)', statistic),
+    url(r'^statistics/$', statistic),
     url(r'^statistics/(\d{1})/$', statistic),
-
-    url(r'^statistics/(\d{1})/(\d{1,2})/$', statistic),
-
+    url(r'^statistics/(\d{1}?)/(\d{1,2}?)/$', statistic),
     )
