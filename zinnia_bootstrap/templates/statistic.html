@@ -1,0 +1,41 @@
+{% extends "pick_server.html" %}
+
+{% block title %}stat{% endblock %}
+
+{% block statistic %}
+
+    <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+{#            <th></th>#}
+            <th><a href="/statistics/{{ server }}/2">Char name</a></th>
+            <th><a href="/statistics/{{ server }}/3">Level</a></th>
+            <th><a href="/statistics/{{ server }}/5">PVP kills</a></th>
+            <th><a href="/statistics/{{ server }}/6">PK kills</a></th>
+            <th><a href="/statistics/{{ server }}/8">Online time</a></th>
+            <th><a href="/statistics/{{ server }}/9">Class</a></th>
+            <th><a href="/statistics/{{ server }}/10">Clan name</a></th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for i in query %}
+            <tr>
+{#                <td>{{ i.obj_id }}</td>#}
+
+                <td>{{ i.char_name }}</td>
+                <td>{{ i.level }}</td>
+                <td>{{ i.pvpkills }}</td>
+                <td>{{ i.pkkills }}</td>
+                <td>{{ i.onlinetime }}</td>
+                <td>{{ i.ClassName }}</td>
+                <td>{{ i.clan_name }}</td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

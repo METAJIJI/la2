@@ -1,0 +1,32 @@
+{% extends "zinnia/base.html" %}
+
+{% block title %}stat{% endblock %}
+
+{% block content %}
+
+
+    <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+{#            <th></th>#}
+            <th>server</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><a href="/statistics/1">game1</a></td>
+                <td><a href="/statistics/1">pick</a></td>
+            </tr>
+
+            <tr>
+                <td><a href="/statistics/2">game2</a></td>
+                <td><a href="/statistics/2">pick</a></td>
+            </tr>
+        </tbody>
+    </table>
+{% block statistic %}
+    {% endblock %}
+
+{% endblock %}

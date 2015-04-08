@@ -61,6 +61,8 @@ INSTALLED_APPS = (
     'registration',
     'extend_user',
 
+    'statistics',
+
 
 )
 MIDDLEWARE_CLASSES = (

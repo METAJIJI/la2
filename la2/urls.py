@@ -7,6 +7,7 @@ from django.views.generic.base import RedirectView
 from django.views.generic.base import TemplateView
 from register.views import *
 from check.views import *
+from statistics.views import *
 
 
 admin.autodiscover()
@@ -26,4 +27,10 @@ urlpatterns = patterns('',
     url(r'^change/(?P<login>[^\.]+)', change_password),
     url(r'^changed/', changed),
     url(r'^captcha/', include('captcha.urls')),
+    url(r'^server/$', pick_server),
+    # url(r'^statistics/(?P<server>[^\.]+)', statistic),
+    url(r'^statistics/(\d{1})/$', statistic),
+
+    url(r'^statistics/(\d{1})/(\d{1,2})/$', statistic),
+
     )
