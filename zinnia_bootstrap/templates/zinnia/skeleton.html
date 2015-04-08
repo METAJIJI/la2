@@ -7,7 +7,7 @@
     <meta name="robots" content="follow, all"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="
-            {% block meta-description %}{% trans "Just another Zinnia weblog." %}{% endblock meta-description %}{% block meta-description-page %}{% endblock meta-description-page %}"/>
+            {% block meta-description %}{% trans "Just another lineage server." %}{% endblock meta-description %}{% block meta-description-page %}{% endblock meta-description-page %}"/>
     <meta name="keywords" content="{% block meta-keywords %}django, blog, weblog, zinnia{% endblock meta-keywords %}"/>
     <meta name="author" content="Fantomas42"/>
     {% block meta %}{% endblock meta %}
@@ -69,7 +69,7 @@
             <ul class="nav navbar-nav navbar-left">
                 {% url 'zinnia:category_list' as category_list_url %}
                 <li {% if category_list_url in request.path %}class="active"{% endif %}>
-                    <a href="{{ category_list_url }}" title="{% trans "News" %}">
+                    <a href="/" title="{% trans "News" %}">
                         {% trans "News" %}
                     </a>
                 </li>
@@ -112,7 +112,7 @@
                     </li>
                 {% else %}
                     <li>
-                        <a href="" title="{% trans "RSS Feed of latest entries" %}" class="feeds">
+                        <a href="">
 
                             {% trans "Hello" %}, {{ user.username }}
                         </a>
@@ -132,7 +132,7 @@
 <div class="container">
     <div class="row">
         <div id="content" class="hfeed col-xs-12 col-sm-8 col-md-8 col-lg-8">
-            {% block breadcrumbs %}{% endblock %}
+{#            {% block breadcrumbs %}{% endblock %}#}
             {% block content %}
                 <div class="links">
                     <h3>{% trans "Useful links" %}</h3>

@@ -8,12 +8,13 @@ from django.views.generic.base import TemplateView
 from register.views import *
 from check.views import *
 from statistics.views import *
+from cabinet.views import *
 
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^blog', RedirectView.as_view(url='/')),
+    url(r'^news', RedirectView.as_view(url='/')),
     url(r'^', include('zinnia.urls', namespace='zinnia')),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
@@ -23,8 +24,9 @@ urlpatterns = patterns('',
     url(r'^complete/', complete),
     url(r'^show/', show),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^cabinet/', cabinet),
-    url(r'^change/(?P<login>[^\.]+)', change_password),
+    url(r'^cabinet/$', cabinet),
+    url(r'^cabinet/(?P<login>[^\.]+)$', show_account),
+    url(r'^change/(?P<login>[^\.]+)$', change_password),
     url(r'^changed/', changed),
     url(r'^captcha/', include('captcha.urls')),
     url(r'^server/$', pick_server),

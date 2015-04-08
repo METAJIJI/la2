@@ -27,53 +27,8 @@ def register(request):
     })
 
 
-def change_password(request, login):
-    login = login[:-1]
-    acc = Accounts.objects.get(login=login)
-    query = ServerLogin.objects.using('default').filter(user_id=request.user.id, login=login)
-    if query:
-        if request.method == 'POST':
-            form = ChangePasswordForm(request.POST)
-            if form.is_valid():
-                password = request.POST.get('password1', '')
-                oldpass = request.POST.get('oldpassword', '')
-                if hash_type == 'whirlpool':
-                    password = base64.b64encode(whirlpool.new(password).digest())
-                    if acc.password == base64.b64encode(whirlpool.new(oldpass).digest()):
-                        acc_obj = Accounts(login=login, password=password)
-                        acc_obj.save()
-                        return HttpResponseRedirect("/changed/")
-                elif hash_type == 'sha1':
-                    password = base64.b64encode(hashlib.sha1(password).digest())
-                    if acc.password == base64.b64encode(hashlib.sha1(oldpass).digest()):
-                        acc_obj = Accounts(login=login, password=password)
-                        acc_obj.save()
-
-                        return HttpResponseRedirect("/changed/")
-                return render(request, "change.html", {
-            'form': form, 'acc': acc,
-        })
-        else:
-            form = ChangePasswordForm()
-    else:
-        return HttpResponseRedirect("/cabinet/")
-    return render(request, "change.html", {
-        'form': form, 'acc': acc,
-    })
-
-
 def complete(request):
     return render(request, 'complete.html')
 
 
-def changed(request):
-    return render(request, 'changed.html')
-
-
-def cabinet(request):
-    query = ServerLogin.objects.using('default').filter(user_id=request.user.id)
-
-    return render(request, "cabinet.html", {
-        'query': query,
-    })
 

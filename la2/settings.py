@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'extend_user',
 
     'statistics',
+    'cabinet',
 
 
 )
