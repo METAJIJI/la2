@@ -1,0 +1,41 @@
+{% extends "zinnia/base.html" %}
+
+{% block title %}acount managment{% endblock %}
+
+{% block content %}
+    <h1>account {{ login }} {{ id }}</h1>
+
+
+    <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+            {#            <th>server</th>#}
+            <th>Account</th>
+            <th>Char name</th>
+            <th>Level</th>
+            <th>Exp</th>
+            <th>PVP</th>
+            <th>PK kills</th>
+            <th>Class</th>
+            <th>Clan name</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in query1 %}
+            <tr>
+                <td>{{ i.account_name }}</td>
+                <td>{{ i.char_name }}</td>
+                <td>{{ i.level }}</td>
+                <td>{{ i.exp }}</td>
+                <td>{{ i.pvpkills }}</td>
+                <td>{{ i.pkkills }}</td>
+                <td>{{ i.ClassName }}</td>
+                <td>{{ i.clan_name }}</td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
