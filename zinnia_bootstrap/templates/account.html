@@ -1,14 +1,15 @@
-{% extends "zinnia/base.html" %}
+{% extends "choose_server.html" %}
 
 {% block title %}acount managment{% endblock %}
 
-{% block content %}
-    <h1>account {{ login }}</h1>
+{% block account %}
+    <h1>account {{ login }} </h1>
+    <h1>server {{ server }} </h1>
 
 <table class="table table-striped table-hover ">
         <thead>
         <tr>
-{#            <th>server</th>#}
+            <th>server</th>
             <th><a href="">Char name</a></th>
             <th><a href="">Level</a></th>
             <th><a href="">Class</a></th>
@@ -16,9 +17,9 @@
         </thead>
 
         <tbody>
-        {% for i in query1 %}
+        {% for i in query %}
             <tr>
-                <td><a href="/cabinet/{{ login }}/{{ i.obj_id }}">{{ i.char_name }}</a></td>
+                <td><a href="/cabinet/{{ server }}/{{ login }}/{{ i.obj_id }}">{{ i.char_name }}</a></td>
                 <td>{{ i.level }}</td>
                 <td>{{ i.ClassName }}</td>
             </tr>
@@ -26,28 +27,5 @@
         </tbody>
     </table>
 
-    <table class="table table-striped table-hover ">
-        <thead>
-        <tr>
-{#            <th>server</th>#}
-            <th><a href="/statistics/{{ server }}/2">Char name</a></th>
-            <th><a href="/statistics/{{ server }}/3">Level</a></th>
-            <th><a href="/statistics/{{ server }}/5">Class</a></th>
-        </tr>
-        </thead>
-
-        <tbody>
-        {% for i in query2 %}
-            <tr>
-{#                <td>{{ server }}</td>#}
-
-
-                <td>{{ i.char_name }}</td>
-                <td>{{ i.level }}</td>
-                <td>{{ i.ClassName }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
 {% endblock %}

@@ -57,9 +57,9 @@ def cabinet(request):
     })
 
 
-def show_account(request, login):
+def show_account(request, server, login):
     login = login
-    # server = ['1', '2']
+
     check = ServerLogin.objects.using('default').filter(user_id=request.user.id, login=login)
 
     q = '''SELECT characters.obj_Id, characters.account_name,  characters.char_name,
@@ -67,33 +67,31 @@ character_subclasses.level, characters.accesslevel, characters.lastAccess, char_
 FROM `characters`
 LEFT JOIN `character_subclasses` ON characters.obj_Id = character_subclasses.char_obj_id
 LEFT JOIN `char_templates` ON character_subclasses.class_id = char_templates.ClassId
-WHERE characters.account_name = '%s' ''' % login
+WHERE characters.account_name = %s '''
     if check:
-        query1 = Characters.objects.using('1').raw(q)
-        query2 = Characters.objects.using('2').raw(q)
+        query = Characters.objects.using(server).raw(q, [login])
     else:
         return HttpResponseRedirect("/cabinet/")
     return render(request, "account.html", {
-        'query1': query1, 'query2': query2, 'login': login
+        'query': query, 'login': login, 'server': server,
     })
 
 
-def show_character(request, login, id):
-    # login = login[:-1]
-    # id = id
+def show_character(request, server, login, login_id):
+    login = login
+    login_id = login_id
     check = ServerLogin.objects.using('default').filter(user_id=request.user.id, login=login)
-
+    check2 = Characters.objects.using(server).filter(account_name=login, obj_id=login_id)
     q = '''SELECT characters.obj_Id, characters.account_name, characters.char_name, character_subclasses.level, characters.sex, character_subclasses.class_id, characters.online, character_subclasses.exp, character_subclasses.sp, characters.karma, characters.pvpkills, characters.pkkills, characters.accesslevel, characters.onlinetime, characters.lastAccess, char_templates.ClassName, clan_data.clan_name
 		FROM `characters`
 		LEFT JOIN `character_subclasses` ON characters.obj_Id = character_subclasses.char_obj_id AND character_subclasses.isBase='1'
 		LEFT JOIN `char_templates` ON character_subclasses.class_id = char_templates.ClassId
 		LEFT JOIN `clan_data` ON characters.clanid = clan_data.clan_id
-		WHERE characters.obj_Id='%s' ''' % id
-    # if check:
-    query1 = Characters.objects.using('1').raw(q)
-    query2 = Characters.objects.using('2').raw(q)
-    # else:
-    #     return HttpResponseRedirect("/cabinet/")
+		WHERE characters.obj_Id= %s '''
+    if check and check2:
+        query = Characters.objects.using(server).raw(q, [login_id])
+    else:
+        return HttpResponseRedirect("/cabinet/"+server+'/'+login+'/')
     return render(request, "show_character.html", {
-        'query1': query1, 'query2': query2, 'login': login, 'id': id,
+        'query': query, 'login': login, 'id': id,
     })

@@ -16,17 +16,18 @@
 
         <tbody>
             <tr>
-                <td><a href="/cabinet/1">game1</a></td>
-                <td><a href="/cabinet/1">pick</a></td>
+                <td><a href="/cabinet/1/{{ login }}">game1</a></td>
+                <td><a href="/cabinet/1/{{ login }}">pick</a></td>
             </tr>
 
             <tr>
-                <td><a href="/cabinet/2">game2</a></td>
-                <td><a href="/cabinet/2">pick</a></td>
+                <td><a href="/cabinet/2/{{ login }}">game2</a></td>
+                <td><a href="/cabinet/2/{{ login }}">pick</a></td>
             </tr>
         </tbody>
     </table>
-{% block statistic %}
+{% block account %}
     {% endblock %}
+
 
 {% endblock %}

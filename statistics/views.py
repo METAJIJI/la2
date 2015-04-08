@@ -19,9 +19,9 @@ def statistic(request, server='1', number=5):
 		LEFT JOIN `clan_data` ON characters.clanid = clan_data.clan_id
 		WHERE characters.accesslevel='0'
 		ORDER BY %s DESC
-		LIMIT 20''' % int(number)
+		LIMIT 20'''
 
-    query = Characters.objects.using(server).raw(q)
+    query = Characters.objects.using(server).raw(q, [number])
 
     return render(request, "statistic.html", {
         'query': query, 'server': server,
