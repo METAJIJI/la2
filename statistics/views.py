@@ -10,8 +10,7 @@ def pick_server(request):
 def statistic(request, server='1', number=5):
     q = '''SELECT characters.obj_Id, characters.char_name, character_subclasses.level, characters.sex,
           characters.pvpkills, characters.pkkills, characters.online, characters.onlinetime,
-          char_templates.ClassName,
-        clan_data.clan_name,  clan_data.clan_id
+          char_templates.ClassName, clan_data.clan_name,  clan_data.clan_id
 		FROM `characters`
 		LEFT JOIN `character_subclasses` ON characters.obj_Id = character_subclasses.char_obj_id
 		AND character_subclasses.isBase='1'
@@ -21,8 +20,8 @@ def statistic(request, server='1', number=5):
 		ORDER BY %s DESC
 		LIMIT 20'''
 
-    query = Characters.objects.using(server).raw(q, [number])
+    query = Characters.objects.using(server).raw(q, [int(number)])
 
     return render(request, "statistic.html", {
-        'query': query, 'server': server,
+        'query': query, 'server': server, 'number': number,
     })
