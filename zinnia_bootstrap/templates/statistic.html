@@ -55,13 +55,15 @@
         </tbody>
     </table>
 <script>
-$(document).ready(function()
-    {
+$('table').tablesorter({
 
-        $.tablesorter.defaults.widgets = ['zebra'];
-        $("#myTable").tablesorter();
+    // customize header HTML
+    onRenderHeader: function(index) {
+        // the span wrapper is added by default
+        this.wrapInner('<span class="icons"></span>');
     }
-);
+
+});
 
 
 </script>
