@@ -8,6 +8,8 @@ import base64
 import hashlib
 from la2.settings import hash_type
 from statistics.models import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 
 def change_password(request, login):
@@ -80,6 +82,10 @@ WHERE characters.account_name = %s '''
 def show_character(request, server, login, login_id, sort='3', order='ASC'):
     # login = login
     # login_id = login_id
+    page = request.GET.get('page')
+    if page:
+        page = int(page)
+    print page
     check = ServerLogin.objects.using('default').filter(user_id=request.user.id, login=login)
     check2 = Characters.objects.using(server).filter(account_name=login, obj_id=login_id)
     character = '''SELECT characters.obj_Id, characters.account_name, characters.char_name, character_subclasses.level, characters.sex, character_subclasses.class_id, characters.online, character_subclasses.exp, character_subclasses.sp, characters.karma, characters.pvpkills, characters.pkkills, characters.accesslevel, characters.onlinetime, characters.lastAccess, char_templates.ClassName, clan_data.clan_name
@@ -105,16 +111,23 @@ SELECT items.object_id, items.item_id, items.count,items.enchant_level,items.loc
 		WHERE items.owner_id=%s
 		ORDER BY %s
     '''
-    print items
     if order == 'asc' or order == 'desc':
         items += str(order)
     if check and check2:
         char_query = Characters.objects.using(server).raw(character, [login_id])
         items_query = Items.objects.using(server).raw(items, [login_id, int(sort)])
+        paginator = Paginator(items_query, 10)
+        paginator._count = len(list(items_query))
 
+        try:
+            items_pag = paginator.page(page)
+        except PageNotAnInteger:
+            items_pag = paginator.page(1)
+        except EmptyPage:
+            items_pag = paginator.page(paginator.num_pages)
     else:
         return HttpResponseRedirect("/cabinet/"+server+'/'+login+'/')
     return render(request, "show_character.html", {
-        'char_query': char_query, 'items_query': items_query, 'login': login, 'id': id, 'server': server,
+        'char_query': char_query, 'items_pag': items_pag, 'login': login, 'id': id, 'server': server,
 
     })

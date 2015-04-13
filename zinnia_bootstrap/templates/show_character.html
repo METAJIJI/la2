@@ -74,7 +74,8 @@
         </tr>
         </thead>
         <tbody>
-        {% for a in items_query %}
+{#        {% autopaginate items_pag %}#}
+        {% for a in items_pag %}
             <tr>
                 <td>{{ a.count }}</td>
                 <td>{{ a.enchant_level }}</td>
@@ -85,6 +86,23 @@
 
             </tr>
         {% endfor %}
+{#        {% paginate %}#}
+
         </tbody>
     </table>
+    <div class="pagination">
+    <span class="step-links">
+        {% if items_pag.has_previous %}
+            <a href="{{ request.path }}?page={{ items_pag.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ items_pag.number }} of {{ items_pag.paginator.num_pages }}.
+        </span>
+
+        {% if items_pag.has_next %}
+            <a href="{{ request.path }}?page={{ items_pag.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock %}
