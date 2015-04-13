@@ -1,5 +1,5 @@
 from register.models import Accounts
-from register.form import UserCreationForm, ChangePasswordForm
+from register.form import ChangePasswordForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from extend_user.models import ServerLogin
@@ -77,21 +77,44 @@ WHERE characters.account_name = %s '''
     })
 
 
-def show_character(request, server, login, login_id):
-    login = login
-    login_id = login_id
+def show_character(request, server, login, login_id, sort='3', order='ASC'):
+    # login = login
+    # login_id = login_id
     check = ServerLogin.objects.using('default').filter(user_id=request.user.id, login=login)
     check2 = Characters.objects.using(server).filter(account_name=login, obj_id=login_id)
-    q = '''SELECT characters.obj_Id, characters.account_name, characters.char_name, character_subclasses.level, characters.sex, character_subclasses.class_id, characters.online, character_subclasses.exp, character_subclasses.sp, characters.karma, characters.pvpkills, characters.pkkills, characters.accesslevel, characters.onlinetime, characters.lastAccess, char_templates.ClassName, clan_data.clan_name
+    character = '''SELECT characters.obj_Id, characters.account_name, characters.char_name, character_subclasses.level, characters.sex, character_subclasses.class_id, characters.online, character_subclasses.exp, character_subclasses.sp, characters.karma, characters.pvpkills, characters.pkkills, characters.accesslevel, characters.onlinetime, characters.lastAccess, char_templates.ClassName, clan_data.clan_name
 		FROM `characters`
 		LEFT JOIN `character_subclasses` ON characters.obj_Id = character_subclasses.char_obj_id AND character_subclasses.isBase='1'
 		LEFT JOIN `char_templates` ON character_subclasses.class_id = char_templates.ClassId
 		LEFT JOIN `clan_data` ON characters.clanid = clan_data.clan_id
 		WHERE characters.obj_Id= %s '''
+    items = '''
+SELECT items.object_id, items.item_id, items.count,items.enchant_level,items.loc,
+			CASE WHEN armor.name != '' THEN armor.name
+			WHEN weapon.name != '' THEN weapon.name
+			WHEN etcitem.name != '' THEN etcitem.name
+			END AS name,
+			CASE WHEN armor.crystal_type != '' THEN 'armor'
+			WHEN weapon.crystal_type != '' THEN 'weapon'
+			WHEN etcitem.crystal_type != '' THEN 'etc'
+			END AS `type`
+		FROM `items`
+		LEFT JOIN `armor` ON armor.item_id = items.item_id
+		LEFT JOIN weapon ON weapon.item_id = items .item_id
+		LEFT JOIN etcitem ON etcitem.item_id = items.item_id
+		WHERE items.owner_id=%s
+		ORDER BY %s
+    '''
+    print items
+    if order == 'asc' or order == 'desc':
+        items += str(order)
     if check and check2:
-        query = Characters.objects.using(server).raw(q, [login_id])
+        char_query = Characters.objects.using(server).raw(character, [login_id])
+        items_query = Items.objects.using(server).raw(items, [login_id, int(sort)])
+
     else:
         return HttpResponseRedirect("/cabinet/"+server+'/'+login+'/')
     return render(request, "show_character.html", {
-        'query': query, 'login': login, 'id': id,
+        'char_query': char_query, 'items_query': items_query, 'login': login, 'id': id, 'server': server,
+
     })

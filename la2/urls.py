@@ -27,7 +27,7 @@ urlpatterns = patterns('',
 
     url(r'^cabinet/$', cabinet),
     url(r'^cabinet/(?P<server>(\w+))/(?P<login>(\w+))/$', show_account),
-    url(r'^cabinet/(?P<server>(\w+))/(?P<login>(\w+))/(?P<login_id>(\w+))$', show_character),
+    url(r'^cabinet/(?P<server>(\w+))/(?P<login>(\w+))/(?P<login_id>(\w+))/(?P<sort>(\w+))/(?P<order>(\w+))/$', show_character),
 
     url(r'^change/(?P<login>[^\.]+)$', change_password),
     url(r'^changed/', changed),

@@ -20,7 +20,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for i in query %}
+        {% for i in char_query %}
             <tr>
                 <td>{{ i.account_name }}</td>
                 <td>{{ i.char_name }}</td>
@@ -35,4 +35,56 @@
         </tbody>
     </table>
 
+
+    <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+            {% for i in char_query %}
+                {% if "desc/" in request.path %}
+                    <th><a href="/cabinet/{{ server }}/{{ login }}/{{ i.obj_id }}/3/asc/">Count</a></th>
+                {% else %}
+                    <th><a href="/cabinet/{{ server }}/{{ login }}/{{ i.obj_id }}/3/desc/">Count</a></th>
+                {% endif %}
+
+
+                {% if "desc/" in request.path %}
+                    <th><a href="/cabinet/{{ server }}/{{ login }}/{{ i.obj_id }}/4/asc/">Enchant level</a></th>
+                {% else %}
+                    <th><a href="/cabinet/{{ server }}/{{ login }}/{{ i.obj_id }}/4/desc/">Enchant level</a></th>
+                {% endif %}
+                {% if "desc/" in request.path %}
+                    <th><a href="/cabinet/{{ server }}/{{ login }}/{{ i.obj_id }}/5/asc/">Location</a></th>
+                {% else %}
+                    <th><a href="/cabinet/{{ server }}/{{ login }}/{{ i.obj_id }}/5/desc/">Location</a></th>
+                {% endif %}
+                {% if "desc/" in request.path %}
+                    <th><a href="/cabinet/{{ server }}/{{ login }}/{{ i.obj_id }}/6/asc/">Name</a></th>
+                {% else %}
+                    <th><a href="/cabinet/{{ server }}/{{ login }}/{{ i.obj_id }}/6/desc/">Name</a></th>
+                {% endif %}
+                {% if "desc/" in request.path %}
+                    <th><a href="/cabinet/{{ server }}/{{ login }}/{{ i.obj_id }}/7/asc/">Type</a></th>
+                {% else %}
+                    <th><a href="/cabinet/{{ server }}/{{ login }}/{{ i.obj_id }}/7/desc/">Type</a></th>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for a in items_query %}
+            <tr>
+                <td>{{ a.count }}</td>
+                <td>{{ a.enchant_level }}</td>
+                <td>{{ a.loc }}</td>
+                <td>{{ a.name }}</td>
+                <td>{{ a.type }}</td>
+
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
