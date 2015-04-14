@@ -45,6 +45,17 @@
         {% endfor %}
         </tbody>
     </table>
+<script>
+$('table').tablesorter({
 
+    // customize header HTML
+    onRenderHeader: function(index) {
+        // the span wrapper is added by default
+        this.wrapInner('<span class="icons"></span>');
+    }
+
+});
+
+</script>
 
 {% endblock %}
