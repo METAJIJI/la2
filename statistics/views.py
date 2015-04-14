@@ -5,7 +5,7 @@ from la2.settings import server_names
 
 
 
-def statistic(request, server=server_names[0], number=5):
+def players(request, server=server_names[0], number=5):
     q = '''SELECT characters.obj_Id, characters.char_name, character_subclasses.level, characters.sex,
           characters.pvpkills, characters.pkkills, characters.online, characters.onlinetime,
           char_templates.ClassName, clan_data.clan_name,  clan_data.clan_id
@@ -20,6 +20,18 @@ def statistic(request, server=server_names[0], number=5):
 
     query = Characters.objects.using(server).raw(q, [int(number)])
 
-    return render(request, "statistic.html", {
+    return render(request, "player_statistic.html", {
         'query': query, 'server': server, 'number': number, 'servers': server_names
+    })
+
+def castles(request, server=server_names[0]):
+    q = '''
+        SELECT castle.name, castle.id, castle.taxPercent, castle.siegeDate,
+        clan_data.clan_name, clan_data.clan_id
+		FROM castle
+		LEFT JOIN clan_data ON clan_data.hasCastle = castle.id
+        '''
+    query = Castle.objects.using(server).raw(q)
+    return render(request, "castle_statistic.html", {
+        'query': query, 'server': server, 'servers': server_names
     })

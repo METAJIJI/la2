@@ -1,0 +1,50 @@
+{% extends "zinnia/base.html" %}
+
+{% block title %}stat{% endblock %}
+
+{% block content %}
+<ul class="nav nav-pills nav-stacked">
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+      Choose server<span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        {% for i in servers %}
+        <li> <a href="/statistics/castles/{{ i }}">{{ i }}</a></li>
+
+{% endfor %}
+    </ul>
+  </li>
+</ul>
+    <br>
+
+
+    <br/>
+
+    <table class="tablesorter table table-striped table-hover" id="myTable">
+        <thead>
+        <tr>
+            <th><a href="/statistics/{{ server }}/2">name</a></th>
+            <th><a href="/statistics/{{ server }}/3">tax</a></th>
+            <th><a href="/statistics/{{ server }}/5">date</a></th>
+            <th><a href="/statistics/{{ server }}/6">clan</a></th>
+
+
+        </tr>
+        </thead>
+{% load timetags %}
+        <tbody>
+        {% for i in query %}
+            <tr>
+                <td>{{ i.name }}</td>
+                <td>{{ i.taxpercent }}</td>
+                <td>{{ i.siegedate|print_timestamp }}</td>
+                <td>{{ i.clan_name|default:"poka svoboden" }}</td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

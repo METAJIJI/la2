@@ -10,7 +10,7 @@
     </a>
     <ul class="dropdown-menu">
         {% for i in servers %}
-        <li> <a href="/statistics/{{ i }}">{{ i }}</a></li>
+        <li> <a href="/statistics/players/{{ i }}">{{ i }}</a></li>
 
 {% endfor %}
     </ul>
@@ -24,13 +24,13 @@
       Order by<span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-<li><a href="/statistics/{{ server }}/2">Char name</a></li>
-        <li> <a href="/statistics/{{ server }}/3">Level</a></li>
-          <li><a href="/statistics/{{ server }}/5">PVP kills</a></li>
-        <li><a href="/statistics/{{ server }}/6">PK kills</a></li>
-            <li><a href="/statistics/{{ server }}/8">Online time</a></li>
-            <li><a href="/statistics/{{ server }}/9">Class</a></li>
-            <li><a href="/statistics/{{ server }}/10">Clan name</a></li>
+<li><a href="/statistics/players/{{ server }}/2">Char name</a></li>
+        <li> <a href="/statistics/players/{{ server }}/3">Level</a></li>
+          <li><a href="/statistics/players/{{ server }}/5">PVP kills</a></li>
+        <li><a href="/statistics/players/{{ server }}/6">PK kills</a></li>
+            <li><a href="/statistics/players/{{ server }}/8">Online time</a></li>
+            <li><a href="/statistics/players/{{ server }}/9">Class</a></li>
+            <li><a href="/statistics/players/{{ server }}/10">Clan name</a></li>
     </ul>
   </li>
 </ul>

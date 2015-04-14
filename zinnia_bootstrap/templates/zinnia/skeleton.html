@@ -83,14 +83,19 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="/statistics/" title="{% trans "Statistic" %}">
-                        {% trans "Statistic" %}
-                    </a>
-                </li>
 
-                <li class="divider-vertical"></li>
-            </ul>
+
+                    <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Statistic <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/statistics/players/" title="{% trans "Statistic" %}">Players</a></li>
+            <li><a href="/statistics/castles/">Castles</a></li>
+            <li><a href="#">Something else here</a></li>
+             </ul>
+        </li>
+
+
+
             <form method="get" action="{% url 'zinnia:entry_search' %}" class="navbar-form navbar-left">
                 <div class="form-group">
                     <input type="text" class="search-query form-control" placeholder="{% trans 'Search' %}"

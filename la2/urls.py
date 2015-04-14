@@ -34,7 +34,9 @@ urlpatterns = patterns('',
     url(r'^changed/', changed),
     url(r'^captcha/', include('captcha.urls')),
 
-    url(r'^statistics/$', statistic),
-    url(r'^statistics/(\d{1,2})/$', statistic),
-    url(r'^statistics/(\d{1,2}?)/(\d{1,2}?)/$', statistic),
+    url(r'^statistics/players/$', players),
+    url(r'^statistics/players/(\d{1,2})/$', players),
+    url(r'^statistics/players/(\d{1,2}?)/(\d{1,2}?)/$', players),
+    url(r'^statistics/castles/(?P<server>(\w+))/$', castles),
+
     )
