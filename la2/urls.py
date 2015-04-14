@@ -26,13 +26,13 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration.backends.simple.urls')),
 
     url(r'^cabinet/$', cabinet),
+    url(r'^cabinet/(?P<server>(\w+))/$', cabinet),
     url(r'^cabinet/(?P<server>(\w+))/(?P<login>(\w+))/$', show_account),
     url(r'^cabinet/(?P<server>(\w+))/(?P<login>(\w+))/(?P<login_id>(\w+))/(?P<sort>(\w+))/(?P<order>(\w+))/$', show_character),
 
     url(r'^change/(?P<login>[^\.]+)$', change_password),
     url(r'^changed/', changed),
     url(r'^captcha/', include('captcha.urls')),
-    url(r'^server/$', pick_server),
 
     url(r'^statistics/$', statistic),
     url(r'^statistics/(\d{1,2})/$', statistic),

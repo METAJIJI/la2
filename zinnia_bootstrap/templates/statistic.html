@@ -1,8 +1,22 @@
-{% extends "pick_server.html" %}
+{% extends "zinnia/base.html" %}
 
 {% block title %}stat{% endblock %}
 
-{% block statistic %}
+{% block content %}
+<ul class="nav nav-pills nav-stacked">
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+      Choose server<span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+        {% for i in servers %}
+        <li> <a href="/statistics/{{ i }}">{{ i }}</a></li>
+
+{% endfor %}
+    </ul>
+  </li>
+</ul>
+    <br>
 
 <ul class="nav nav-pills nav-stacked">
   <li class="dropdown">

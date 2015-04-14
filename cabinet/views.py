@@ -6,10 +6,9 @@ from extend_user.models import ServerLogin
 import whirlpool
 import base64
 import hashlib
-from la2.settings import hash_type
+from la2.settings import hash_type, server_names
 from statistics.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
 
 
 def change_password(request, login):
@@ -43,7 +42,7 @@ def change_password(request, login):
     else:
         return HttpResponseRedirect("/cabinet/")
     return render(request, "change.html", {
-        'form': form, 'acc': acc,
+        'form': form, 'acc': acc, 'server_names': server_names,
     })
 
 
@@ -51,17 +50,15 @@ def changed(request):
     return render(request, 'changed.html')
 
 
-def cabinet(request):
+def cabinet(request, server=server_names[0]):
     query = ServerLogin.objects.using('default').filter(user_id=request.user.id)
 
     return render(request, "cabinet.html", {
-        'query': query,
+        'query': query, 'server': server, 'servers': server_names
     })
 
 
 def show_account(request, server, login):
-    login = login
-
     check = ServerLogin.objects.using('default').filter(user_id=request.user.id, login=login)
 
     q = '''SELECT characters.obj_Id, characters.account_name,  characters.char_name,
@@ -88,7 +85,11 @@ def show_character(request, server, login, login_id, sort='3', order='ASC'):
     print page
     check = ServerLogin.objects.using('default').filter(user_id=request.user.id, login=login)
     check2 = Characters.objects.using(server).filter(account_name=login, obj_id=login_id)
-    character = '''SELECT characters.obj_Id, characters.account_name, characters.char_name, character_subclasses.level, characters.sex, character_subclasses.class_id, characters.online, character_subclasses.exp, character_subclasses.sp, characters.karma, characters.pvpkills, characters.pkkills, characters.accesslevel, characters.onlinetime, characters.lastAccess, char_templates.ClassName, clan_data.clan_name
+    character = '''SELECT characters.obj_Id, characters.account_name, characters.char_name,
+character_subclasses.level, characters.sex, character_subclasses.class_id, characters.online,
+character_subclasses.exp, character_subclasses.sp, characters.karma, characters.pvpkills,
+characters.pkkills, characters.accesslevel, characters.onlinetime, characters.lastAccess,
+char_templates.ClassName, clan_data.clan_name
 		FROM `characters`
 		LEFT JOIN `character_subclasses` ON characters.obj_Id = character_subclasses.char_obj_id AND character_subclasses.isBase='1'
 		LEFT JOIN `char_templates` ON character_subclasses.class_id = char_templates.ClassId
@@ -126,7 +127,7 @@ SELECT items.object_id, items.item_id, items.count,items.enchant_level,items.loc
         except EmptyPage:
             items_pag = paginator.page(paginator.num_pages)
     else:
-        return HttpResponseRedirect("/cabinet/"+server+'/'+login+'/')
+        return HttpResponseRedirect("/cabinet/" + server + '/' + login + '/')
     return render(request, "show_character.html", {
         'char_query': char_query, 'items_pag': items_pag, 'login': login, 'id': id, 'server': server,
 

@@ -148,6 +148,8 @@ server_list = [
     [2, 'ls.la2.metajiji.tk', 7777, 1, 'game server']
 ]
 
+server_names = ['1','2']
+
 CRON_CLASSES = [
     'check.cron.Check',
 ]
