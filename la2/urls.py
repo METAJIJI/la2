@@ -37,6 +37,12 @@ urlpatterns = patterns('',
     url(r'^statistics/players/$', players),
     url(r'^statistics/players/(\d{1,2})/$', players),
     url(r'^statistics/players/(\d{1,2}?)/(\d{1,2}?)/$', players),
+
+    url(r'^statistics/castles/$', castles),
     url(r'^statistics/castles/(?P<server>(\w+))/$', castles),
+
+    url(r'^statistics/clans/$', clans),
+    url(r'^statistics/clans/(?P<server>(\w+))/$', clans),
+    url(r'^statistics/clans/(?P<server>(\w+))/(?P<clanid>(\w+))/$', clan_members),
 
     )
