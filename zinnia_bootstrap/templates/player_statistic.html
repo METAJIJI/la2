@@ -56,7 +56,11 @@
         <tbody>
         {% for i in query %}
             <tr>
-                <td>{{ i.char_name }}</td>
+            {% if i.sex == 1 %}
+                <td><font color="#ff1493">{{ i.char_name }}</font></td>
+                {% else%}
+                 <td><font color="blue">{{ i.char_name }}</font></td>
+                {% endif %}
                 <td>{{ i.level }}</td>
                 <td>{{ i.pvpkills }}</td>
                 <td>{{ i.pkkills }}</td>

@@ -16,7 +16,7 @@ def players(request, server=server_names[0], number=5):
 		LEFT JOIN `clan_data` ON characters.clanid = clan_data.clan_id
 		WHERE characters.accesslevel='0'
 		ORDER BY %s DESC
-		LIMIT 10'''
+		LIMIT 100'''
 
     query = Characters.objects.using(server).raw(q, [int(number)])
 
@@ -61,7 +61,6 @@ clan_data.clan_level, clan_data.reputation_score, clan_data.hasCastle, character
 			) AS levels ON clan_data.clan_id = levels.clanid
 		LEFT JOIN `ally_data` ON clan_data.ally_id = ally_data.ally_id
 		ORDER BY clan_data.clan_level DESC, clan_data.reputation_score DESC
-		LIMIT 10
 		'''
 
     query = ClanData.objects.using(server).raw(q)
