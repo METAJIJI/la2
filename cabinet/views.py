@@ -7,7 +7,7 @@ import whirlpool
 import base64
 import hashlib
 from la2.settings import hash_type, server_names
-from statistics.models import *
+from statistics.models import Characters, Items
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 

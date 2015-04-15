@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from models import *
+from models import ClanData, Characters
 from django.http import HttpResponseRedirect
 from la2.settings import server_names
 
@@ -40,12 +40,12 @@ def castles(request, server=server_names[0]):
     '''
 
 
-    query = Castle.objects.using(server).raw(castles)
-    query2 = SiegeClans.objects.using(server).raw(castles_data)
+    # query = Castle.objects.using(server).raw(castles)
+    # query2 = SiegeClans.objects.using(server).raw(castles_data)
 
 
     return render(request, "castle_statistic.html", {
-       'query': query, 'query2': query2, 'server': server, 'servers': server_names
+       # 'query': query, 'query2': query2, 'server': server, 'servers': server_names
     })
 
 
